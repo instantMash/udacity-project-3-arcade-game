@@ -9,6 +9,7 @@ var Enemy = function(x,y,speed) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.speed = speed;
 };
 
 // Update the enemy's position, required method for game
@@ -17,11 +18,27 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += 1;
+    this.x += this.speed * dt;
 
     // Reset enemies position
     if (this.x >= 505) {
-      this.x = 0;
+      this.x = -75;
+    }
+
+    // collision detection
+    if ((this.y === 50 && player.y === 50) && (this.x > player.x - 60 && this.x < player.x + 10)) {
+      player.x = 200;
+      player.y = 390;
+    }
+
+    if ((this.y === 130 && player.y === 135) && (this.x > player.x - 60 && this.x < player.x + 10)) {
+      player.x = 200;
+      player.y = 390;
+    }
+
+    if ((this.y === 210 && player.y === 220) && (this.x > player.x - 60 && this.x < player.x + 10)) {
+      player.x = 200;
+      player.y = 390;
     }
 
 };
@@ -46,39 +63,23 @@ var Player = function(x,y) {
 
 Player.prototype.update = function(dt) {
 
-  // keyboard condtrols
-  if (player.x < 0) {
-    player.x = 0;
-  };
+  // boundaries
+  if (this.x < 0) {
+    this.x = 0;
+  }
 
-  if (player.x > 400) {
-    player.x = 400;
-  };
+  if (this.x > 400) {
+    this.x = 400;
+  }
 
-  if (player.y < -35) {
-    player.y = 390;
-  };
-
-  if (player.y > 390) {
-    player.y = 390;
-  };
-
-  // collision detection
-  if ((enemy1.y === 50 && player.y === 50) && (enemy1.x > player.x - 60 && enemy1.x < player.x + 10)) {
+  if (this.y < -25) {
+    this.y = 390;
     player.x = 200;
-    player.y = 390;
-  };
+  }
 
-  if ((enemy2.y === 130 && player.y === 135) && (enemy2.x > player.x - 60 && enemy2.x < player.x + 10)) {
-    player.x = 200;
-    player.y = 390;
-  };
-
-  if ((enemy3.y === 210 && player.y === 220) && (enemy3.x > player.x - 60 && enemy3.x < player.x + 10)) {
-    player.x = 200;
-    player.y = 390;
-  };
-
+  if (this.y > 390) {
+    this.y = 390;
+  }
 
 };
 
@@ -117,8 +118,8 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Place the player object in a variable called player
 
 var enemy1 = new Enemy(0, 50, 100);
-var enemy2 = new Enemy(-50, 130, 100);
-var enemy3 = new Enemy(-25, 210, 100);
+var enemy2 = new Enemy(-50, 130, 125);
+var enemy3 = new Enemy(-25, 210, 105);
 
 var allEnemies = [];
 allEnemies.push(enemy1, enemy2, enemy3);
