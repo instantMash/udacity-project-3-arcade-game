@@ -93,19 +93,19 @@ Player.prototype.handleInput = function(allowedKeys) {
 
   switch (allowedKeys) {
     case "right":
-    player.x += 100;
+    this.x += 100;
     break;
 
     case "left":
-    player.x -= 100;
+    this.x -= 100;
     break;
 
     case "up":
-    player.y -= 85;
+    this.y -= 85;
     break;
 
     case "down":
-    player.y += 85;
+    this.y += 85;
     break;
 
   }
