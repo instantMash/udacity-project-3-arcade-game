@@ -74,7 +74,7 @@ Player.prototype.update = function(dt) {
 
   if (this.y < -25) {
     this.y = 390;
-    player.x = 200;
+    this.x = 200;
   }
 
   if (this.y > 390) {
